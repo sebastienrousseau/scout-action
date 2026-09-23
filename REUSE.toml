@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+#
+# Machine-readable licensing, per the REUSE specification. Every file
+# carries an SPDX header and scripts/spdx-check.sh fails the build when one
+# does not; this file covers what a header cannot.
+
+version = 1
+SPDX-PackageName = "scout-action"
+SPDX-PackageSupplier = "Sebastien Rousseau <sebastian.rousseau@gmail.com>"
+SPDX-PackageDownloadLocation = "https://github.com/sebastienrousseau/scout-action"
+
+[[annotations]]
+path = [".gitignore", ".github/CODEOWNERS"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>"
+SPDX-License-Identifier = "Apache-2.0"

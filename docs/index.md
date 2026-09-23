@@ -1,0 +1,13 @@
+<!-- SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com> -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+# scout-action documentation
+
+The action's reference is [`action.yml`](../action.yml), where every input
+and output carries its description, and the [README](../README.md), which
+adds the examples. What lives here is what is decided about the wrapper.
+
+| Document | Covers |
+|---|---|
+| [adr/](adr/README.md) | Decision records for this repository |
+| [scout's CI guide](https://scoutmcp.io/manual/ci/) | Running scout in a pipeline in general, including the cases this action does not cover |

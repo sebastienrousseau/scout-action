@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+#
+# scout in GitLab CI, from the published image pinned by digest.
+#
+#   include:
+#     - remote: https://raw.githubusercontent.com/sebastienrousseau/scout-action/v0.0.3/templates/scout.gitlab-ci.yml
+#
+# then set MCP_ENDPOINT, and MCP_TOKEN as a masked, protected variable. scout
+# reads the token from the environment; it is never an argument.
+
+variables:
+  SCOUT_IMAGE: "ghcr.io/sebastienrousseau/scout@sha256:3eb41af0eebe737513844d81d250f7fdc65d6b39dbc2e18e5715ee481906047b"
+  SCOUT_ARGS: "--rps 2"
+
+mcp-diagnostic:
+  image:
+    name: "${SCOUT_IMAGE}"
+    entrypoint: [""]
+  timeout: 15m
+  script:
+    - >
+      /usr/local/bin/scout check "${MCP_ENDPOINT}" --token-env MCP_TOKEN
+      --report-dir scout-report --no-color ${SCOUT_ARGS}
+  artifacts:
+    when: always
+    paths:
+      - scout-report/
+    reports:
+      sast: scout-report/report.sarif
+    expire_in: 30 days
+  allow_failure:
+    # 2 is "a check failed or the policy was not met": the report is the
+    # point, so it is recorded as a failed job rather than a broken one.
+    exit_codes: []

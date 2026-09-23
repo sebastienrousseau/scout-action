@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+#
+# The image action.yml pins by digest must be the image scout published for
+# the version this repository is at. A digest is what makes "this action
+# runs what the release signed" true; this is what makes the digest the
+# right one.
+#
+#   scripts/verify-digest.sh
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+version=$(grep -Eo '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' CHANGELOG.md | head -1 | tr -d '#[] ')
+pinned=$(scripts/pinned-image.sh)
+pinned_digest="${pinned#*@}"
+
+token=$(curl -fsSL "https://ghcr.io/token?scope=repository:sebastienrousseau/scout:pull" | python3 -c 'import json,sys; print(json.load(sys.stdin)["token"])')
+published=$(curl -fsSI -H "Authorization: Bearer ${token}" \
+  -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json" \
+  "https://ghcr.io/v2/sebastienrousseau/scout/manifests/${version}" \
+  | tr -d '\r' | awk 'tolower($1) == "docker-content-digest:" { print $2 }')
+[ -n "$published" ] || { echo "verify-digest: ghcr.io has no image tagged ${version}" >&2; exit 1; }
+
+# The GitLab template pins the same image; one digest, two places.
+template=$(sed -n 's/^  SCOUT_IMAGE: "\(.*\)"$/\1/p' templates/scout.gitlab-ci.yml)
+
+fail=0
+if [ "$pinned_digest" != "$published" ]; then
+  echo "verify-digest: action.yml pins ${pinned_digest} and ghcr.io tags ${version} as ${published}" >&2; fail=1
+fi
+if [ "$template" != "$pinned" ]; then
+  echo "verify-digest: templates/scout.gitlab-ci.yml pins ${template}, action.yml pins ${pinned}" >&2; fail=1
+fi
+[ "$fail" -eq 0 ] && echo "verify-digest: action.yml and the GitLab template pin the image ghcr.io tags ${version} (${published})"
+exit "$fail"
