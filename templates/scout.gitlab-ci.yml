@@ -4,13 +4,13 @@
 # scout in GitLab CI, from the published image pinned by digest.
 #
 #   include:
-#     - remote: https://raw.githubusercontent.com/sebastienrousseau/scout-action/v0.0.3/templates/scout.gitlab-ci.yml
+#     - remote: https://raw.githubusercontent.com/sebastienrousseau/scout-action/v0.0.4/templates/scout.gitlab-ci.yml
 #
 # then set MCP_ENDPOINT, and MCP_TOKEN as a masked, protected variable. scout
 # reads the token from the environment; it is never an argument.
 
 variables:
-  SCOUT_IMAGE: "ghcr.io/sebastienrousseau/scout@sha256:3eb41af0eebe737513844d81d250f7fdc65d6b39dbc2e18e5715ee481906047b"
+  SCOUT_IMAGE: "ghcr.io/sebastienrousseau/scout@sha256:95d1ae4601c5d12e51c98fb120e79c36ecb104126698a81150135f7256f473f0"
   SCOUT_ARGS: "--rps 2"
 
 mcp-diagnostic:
