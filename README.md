@@ -59,7 +59,7 @@
 ### As a GitHub Action
 
 ```yaml
-- uses: sebastienrousseau/scout-action@v0.0.4
+- uses: sebastienrousseau/scout-action@v0.0.5
   with:
     endpoint: https://mcp.example.com/mcp
     token: ${{ secrets.MCP_TOKEN }}
@@ -72,7 +72,7 @@ release workflow moves to every release.
 
 ```yaml
 include:
-  - remote: https://raw.githubusercontent.com/sebastienrousseau/scout-action/v0.0.4/templates/scout.gitlab-ci.yml
+  - remote: https://raw.githubusercontent.com/sebastienrousseau/scout-action/v0.0.5/templates/scout.gitlab-ci.yml
 
 variables:
   MCP_ENDPOINT: https://mcp.example.com/mcp
@@ -115,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: sebastienrousseau/scout-action@v0.0.4
+      - uses: sebastienrousseau/scout-action@v0.0.5
         with:
           endpoint: https://mcp.example.com/mcp
           token: ${{ secrets.MCP_TOKEN }}
