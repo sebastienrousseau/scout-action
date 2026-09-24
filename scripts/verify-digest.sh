@@ -15,7 +15,12 @@ version=$(grep -Eo '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' CHANGELOG.md | head -1 | tr 
 pinned=$(scripts/pinned-image.sh)
 pinned_digest="${pinned#*@}"
 
-token=$(curl -fsSL "https://ghcr.io/token?scope=repository:sebastienrousseau/scout:pull" | python3 -c 'import json,sys; print(json.load(sys.stdin)["token"])')
+# Fetched to a file and parsed from it, never piped into an interpreter:
+# that shape reads as download-then-run to a supply-chain scanner.
+tokfile=$(mktemp)
+trap 'rm -f "$tokfile"' EXIT
+curl -fsSL "https://ghcr.io/token?scope=repository:sebastienrousseau/scout:pull" -o "$tokfile"
+token=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["token"])' "$tokfile")
 published=$(curl -fsSI -H "Authorization: Bearer ${token}" \
   -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json" \
   "https://ghcr.io/v2/sebastienrousseau/scout/manifests/${version}" \

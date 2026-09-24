@@ -47,7 +47,10 @@ jobs:
           [[ "${version}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::version must be vX.Y.Z, got '${version}'"; exit 1; }
           digest="${DISPATCHED_DIGEST:-}"
           if [[ -z "${digest}" ]]; then
-            token=$(curl -fsSL "https://ghcr.io/token?scope=repository:sebastienrousseau/scout:pull" | python3 -c 'import json,sys; print(json.load(sys.stdin)["token"])')
+            # Fetched to a file and parsed from it: a download piped into an
+            # interpreter reads as download-then-run to Scorecard.
+            curl -fsSL "https://ghcr.io/token?scope=repository:sebastienrousseau/scout:pull" -o "${RUNNER_TEMP}/ghcr-token.json"
+            token=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["token"])' "${RUNNER_TEMP}/ghcr-token.json")
             digest=$(curl -fsSI -H "Authorization: Bearer ${token}" \
               -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json" \
               "https://ghcr.io/v2/sebastienrousseau/scout/manifests/${version#v}" \
