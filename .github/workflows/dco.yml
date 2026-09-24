@@ -48,7 +48,11 @@ jobs:
           # --no-merges: see the note at the top of this file. A merge commit
           # introduces no authored content, so there is nothing for its author
           # to certify.
-          commits=$(git rev-list --no-merges "${BASE_SHA}..${HEAD_SHA}")
+          # The sync workflow's commits are made through the API by
+          # github-actions[bot] and signed by GitHub; a bot certifies
+          # nothing under the DCO, so its commits are exempt the way merge
+          # commits are. Every human commit still needs the trailer.
+          commits=$(git rev-list --no-merges --perl-regexp --author='^(?!github-actions\[bot\])' "${BASE_SHA}..${HEAD_SHA}")
           if [ -z "${commits}" ]; then
             echo "No commits in the PR range; nothing to check."
             exit 0
