@@ -16,6 +16,12 @@ changelog says what changed in the diagnostic.
 
 ## [Unreleased]
 
+## [0.0.6] — 2026-09-25
+
+### Changed
+
+- **In lockstep with scout 0.0.6.** The action and the GitLab template pin `ghcr.io/sebastienrousseau/scout@sha256:d7b69bd815514e1dd86bb06b6eeffaf4b66d3b9e8e89ea4edb84ffa5c1b81b39`, the multi-arch image scout's release published for 0.0.6. Opened by the sync workflow on the release's dispatch; scout's own changelog says what changed in the diagnostic.
+
 ## [0.0.5] — 2026-09-24
 
 ### Changed
@@ -59,7 +65,8 @@ changelog says what changed in the diagnostic.
   the multi-arch image of scout 0.0.3. This repository's first version is
   scout's current one: it wraps a release, so it cannot be ahead of one.
 
-[Unreleased]: https://github.com/sebastienrousseau/scout-action/compare/v0.0.5...HEAD
+[Unreleased]: https://github.com/sebastienrousseau/scout-action/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/sebastienrousseau/scout-action/releases/tag/v0.0.6
 [0.0.5]: https://github.com/sebastienrousseau/scout-action/releases/tag/v0.0.5
 [0.0.4]: https://github.com/sebastienrousseau/scout-action/releases/tag/v0.0.4
 [0.0.3]: https://github.com/sebastienrousseau/scout-action/releases/tag/v0.0.3
