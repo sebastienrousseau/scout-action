@@ -51,7 +51,11 @@ The version is scout's. A release here follows a scout release:
 1. scout's release workflow fires `repository_dispatch` (`scout-release`)
    with the version and the image digest. The sync workflow opens a pull
    request pinning it. (Or run the sync workflow by hand with the
-   version.)
+   version.) With a `SYNC_TOKEN` secret, a fine-grained token with
+   `pull-requests: write` on this repository, the pull request's checks
+   start on their own; without it, close and reopen the pull request to
+   start them, because one opened with `GITHUB_TOKEN` triggers no
+   workflows.
 2. Review and merge the pull request. CI's `make digest` and
    `make lockstep` are the review.
 3. Push a signed annotated tag `vX.Y.Z` with the message
