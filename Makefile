@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
 
-.PHONY: all lint spdx-check lockstep digest family test help
+.PHONY: all lint spdx-check lockstep digest family test help readme-check
 
 # Every gate CI runs.
 all: lint spdx-check digest lockstep family test
@@ -10,6 +10,11 @@ all: lint spdx-check digest lockstep family test
 lint:
 	actionlint
 	shellcheck scripts/*.sh
+
+# The README follows the portfolio template: headings in order, no
+# unresolved {{VARIABLES}} (AGENTS.md §7.3).
+readme-check:
+	scripts/readme-check.sh
 
 spdx-check:
 	scripts/spdx-check.sh

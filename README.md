@@ -5,7 +5,7 @@
   <img src="https://raw.githubusercontent.com/sebastienrousseau/scout/main/.github/logo.svg" alt="scout-action logo" width="128" />
 </p>
 
-<h1 align="center"><a id="scout-action"></a>scout-action</h1>
+<h1 align="center">scout-action</h1>
 
 <p align="center">
   Run scout, the Model Context Protocol server diagnostic, in GitHub Actions or GitLab CI — from the image the release signed, pinned by digest, with the token never on a command line.
@@ -30,9 +30,9 @@
 - [Requirements](#requirements) — a Linux runner with Docker, a reachable server
 - [Quick Start](#quick-start) — diagnose a server on a schedule
 
-**The scout ecosystem**
+**The scout-action ecosystem**
 
-- [The scout ecosystem](#the-scout-ecosystem) — `scout`, `scout-reporting`, `scout-action`, `scout-mcp`, `scout-lsp`, `scout-census` at a glance
+- [The scout-action ecosystem](#the-scout-action-ecosystem) — `scout`, `scout-reporting`, `scout-action`, `scout-mcp`, `scout-lsp`, `scout-census` at a glance
 
 **Reference**
 
@@ -131,7 +131,7 @@ a log.
 
 ---
 
-## The scout ecosystem
+## The scout-action ecosystem
 
 One engine, three surfaces, five satellites. This repository is the
 cheapest verifiable traction signal in the family: GitHub publishes how
@@ -367,4 +367,4 @@ places no obligation on the workflow that uses it; the wrapper is
 Apache-2.0 so the Marketplace listing and the GitLab template can be
 copied and adapted freely.
 
-<p align="right"><a href="#scout-action">Back to Top</a></p>
+<p align="right"><a href="#contents">Back to Top</a></p>
