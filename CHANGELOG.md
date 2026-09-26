@@ -16,6 +16,14 @@ changelog says what changed in the diagnostic.
 
 ## [Unreleased]
 
+### Fixed
+
+- **The sync pull request no longer repeats a changelog heading.** The
+  workflow opened the release's section with its own `### Changed`, so
+  when the unreleased entries already had one, the section carried two
+  and markdownlint failed. It now puts the lockstep entry first in the
+  existing Changed list, or creates one in Keep a Changelog's order.
+
 ## [0.0.7] — 2026-09-26
 
 ### Changed
