@@ -13,7 +13,7 @@ missing=0
 tag="SPDX-License-Identifier"
 while IFS= read -r f; do
   case "$f" in
-    LICENSE|LICENSES/*|.gitignore|.github/CODEOWNERS) continue ;;
+    LICENSE|LICENSES/*|.gitignore|.github/CODEOWNERS|docs/requirements.txt) continue ;;  # REUSE.toml covers these
   esac
   if ! head -5 "$f" | grep -q "${tag}:"; then
     echo "spdx-check: no licence header: $f" >&2
