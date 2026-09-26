@@ -57,7 +57,7 @@ inputs:
   image:
     description: "Override the image reference. The default is the image of the scout release this action version is in lockstep with, pinned by digest; overriding it means you are no longer running what the release signed."
     required: false
-    default: "ghcr.io/sebastienrousseau/scout@sha256:d7b69bd815514e1dd86bb06b6eeffaf4b66d3b9e8e89ea4edb84ffa5c1b81b39"
+    default: "ghcr.io/sebastienrousseau/scout@sha256:43034d2a0f36b28e3d227335fb19a59e09cd556ee3075f9bcadb5dee9995c32b"
 
 outputs:
   exit-code:
