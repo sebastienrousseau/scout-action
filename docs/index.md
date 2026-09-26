@@ -3,8 +3,8 @@
 
 # scout-action documentation
 
-The action's reference is [`action.yml`](../action.yml), where every input
-and output carries its description, and the [README](../README.md), which
+The action's reference is [`action.yml`](https://github.com/sebastienrousseau/scout-action/blob/main/action.yml), where every input
+and output carries its description, and the [README](https://github.com/sebastienrousseau/scout-action/blob/main/README.md), which
 adds the examples. What lives here is what is decided about the wrapper.
 
 | Document | Covers |
